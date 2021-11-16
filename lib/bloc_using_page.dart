@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:repository_pattern_with_bloc/bloc/counter/counter_event.dart';
 
 import 'bloc/counter/counter_bloc.dart';
 
@@ -44,12 +45,16 @@ class _BlocUsingPageState extends State<BlocUsingPage> {
           FloatingActionButton(
             heroTag: '1',
             child: const Icon(Icons.add),
-            onPressed: () {},
+            onPressed: () {
+              _counterBloc.counterEventSink.add(IncreaseEvent());
+            },
           ),
           FloatingActionButton(
             heroTag: '2',
             child: const Icon(Icons.remove),
-            onPressed: () {},
+            onPressed: () {
+              _counterBloc.counterEventSink.add(DecreaseEvent());
+            },
           ),
         ],
       ),
