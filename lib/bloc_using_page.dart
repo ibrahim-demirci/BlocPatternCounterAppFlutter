@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 
+import 'bloc/counter/counter_bloc.dart';
+
 class BlocUsingPage extends StatefulWidget {
-  const BlocUsingPage({Key? key}) : super(key: key);
+  BlocUsingPage({Key? key}) : super(key: key);
 
   @override
   _BlocUsingPageState createState() => _BlocUsingPageState();
 }
 
 class _BlocUsingPageState extends State<BlocUsingPage> {
+  final _counterBloc = CounterBloc();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,6 +24,16 @@ class _BlocUsingPageState extends State<BlocUsingPage> {
           // ignore: prefer_const_literals_to_create_immutables
           children: [
             const Text('You have pushed button this many times:'),
+            StreamBuilder<int>(
+              initialData: 0,
+              stream: _counterBloc.counter,
+              builder: (context, snapshot) => Text(
+                '${snapshot.data}',
+                style: const TextStyle(
+                  fontSize: 40,
+                ),
+              ),
+            ),
           ],
         ),
       ),
